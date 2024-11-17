@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoExchangeBestValue.Library", "CryptoExchangeBestValue.Library\CryptoExchangeBestValue.Library.csproj", "{F8C44BC7-549D-44DA-BBC3-503CCFC3EEF4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoExchangeBestValue.Library.Tests", "CryptoExchangeBestValue.Library.Tests\CryptoExchangeBestValue.Library.Tests.csproj", "{B902D538-7CD2-4452-AD23-4D15BD3FB495}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F19B395-16BA-4E7B-B3FC-EA12D19BE1CF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		global.json = global.json
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8C44BC7-549D-44DA-BBC3-503CCFC3EEF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8C44BC7-549D-44DA-BBC3-503CCFC3EEF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8C44BC7-549D-44DA-BBC3-503CCFC3EEF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8C44BC7-549D-44DA-BBC3-503CCFC3EEF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B902D538-7CD2-4452-AD23-4D15BD3FB495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B902D538-7CD2-4452-AD23-4D15BD3FB495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B902D538-7CD2-4452-AD23-4D15BD3FB495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B902D538-7CD2-4452-AD23-4D15BD3FB495}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFF25138-B8EA-40E1-96F1-43A392878BDB}
+	EndGlobalSection
+EndGlobal
