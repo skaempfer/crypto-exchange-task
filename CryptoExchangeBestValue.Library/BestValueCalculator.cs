@@ -19,7 +19,10 @@ public class BestValueCalculator : IBestValueCalculator
 
 		(double bestValue, string[] itemIds) = Solve01KnapsackProblem(availableEuros, knapsackItems, 100);
 
-		return new BestValueResult(bestValue, itemIds);
+		GC.Collect();
+		GC.WaitForPendingFinalizers();
+
+		return new BestValueResult(Double.Round(bestValue,2), itemIds);
 	}
 
 	/// <inheritdoc cref="IBestValueCalculator.Sell"/>
@@ -35,7 +38,10 @@ public class BestValueCalculator : IBestValueCalculator
 
 		(double bestValue, string[] itemIds) = Solve01KnapsackProblem(availableCryptos, knapsackItems, 1_000_000);
 
-		return new BestValueResult(bestValue, itemIds);
+		GC.Collect();
+		GC.WaitForPendingFinalizers();
+
+		return new BestValueResult(Double.Round(bestValue, 6), itemIds);
 	}
 
 	/// <summary>
@@ -98,6 +104,8 @@ public class BestValueCalculator : IBestValueCalculator
 		chosenItems.Reverse();
 
 		double bestValue = dp[n, scaledCapacity];
+
+
 
 		return (bestValue, chosenItems.ToArray());
 	}

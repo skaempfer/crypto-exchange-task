@@ -29,12 +29,12 @@ public class UserFunds
 	/// <summary>
 	/// Amount of Crypto resources that can be sold.
 	/// </summary>
-	public decimal Crypto { get; set; }
+	public double Crypto { get; set; }
 	
 	/// <summary>
 	/// Amount of Euro resources that can be used to buy <see cref="Crypto"/> resources.
 	/// </summary>
-	public decimal Euro { get; set; }
+	public double Euro { get; set; }
 }
 
 /// <summary>

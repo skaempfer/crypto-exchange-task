@@ -1,5 +1,11 @@
 # Crypto Exchange Task
 
+## Prerequisites
+
+In order to run the code inside this repository make sure that the following software is installed on your computer:
+
+1. [.NET SDK >= 8.0.400](https://dotnet.microsoft.com/en-us/download/dotnet)
+
 ## Task 1
 
 ### Problem Statement
@@ -44,9 +50,25 @@ Internally both the `Buy` and the `Sell` method use the same 0-1 knapsack proble
 | Value             |Amount (Ask)    | Price (Bid)       |
 | Weight            |Price (Ask)     | Amound (Bid)      |
 
+(!) The following technical constraint was applied to the algorithm implementation: The dynamic programming approach for 0-1 knapsack problems requires the capacity to be of type integer, or better it requires incremental steps of increasing the capacity for its calculation. For the values of the cryptos we are facing a value ranging from two decimal places before and eigth decimal places after the comma. In order to keep the memory consumption within a achievable range the implementation only considers up to six fractional digits of the crypto value. This value is then multiplied with a scale factor to be used as capacity in the best value calculation.
+
+### Run unit tests
+
+Unit tests for the implemented algorithm are available in the project `CryptoExchangeBestValue.Library.Tests`. To execute the unit tests do the following:
+
+1. In a terminal navigate to `./CryptoExchangeBestValue.Library.Tests`
+1. Run `dotnet test`
+ 
+### Run the console application
+
+The implemented algorithm is available for use on the example input data in the project `CryptoExchangeBestValue.Console.` To execute the application do the following
+
+1. In a terminal navigate to `./CryptoExchangeBestValue.Console`
+1. Run the project `dotnet run ..\exchanges\exchange-06.json`
+
 ## Task 2
 
-### Problem Satement
+### Problem Statement
 
 Implement a Web service (Kestrel, .NET Core API), and expose the implemented functionality through it. Implement an endpoint that will receive the required parameters ( order amount, order type and return a JSON response with the "best execution" plan.
 
