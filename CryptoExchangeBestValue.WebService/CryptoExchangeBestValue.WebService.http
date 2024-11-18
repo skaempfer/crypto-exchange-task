@@ -1,0 +1,6 @@
+@CryptoExchangeBestValue.WebService_HostAddress = http://localhost:5057
+
+GET {{CryptoExchangeBestValue.WebService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -50,7 +50,7 @@ Internally both the `Buy` and the `Sell` method use the same 0-1 knapsack proble
 | Value             |Amount (Ask)    | Price (Bid)       |
 | Weight            |Price (Ask)     | Amound (Bid)      |
 
-(!) The following technical constraint was applied to the algorithm implementation: The dynamic programming approach for 0-1 knapsack problems requires the capacity to be of type integer, or better it requires incremental steps of increasing the capacity for its calculation. For the values of the cryptos we are facing a value ranging from two decimal places before and eigth decimal places after the comma. In order to keep the memory consumption within a achievable range the implementation only considers up to six fractional digits of the crypto value. This value is then multiplied with a scale factor to be used as capacity in the best value calculation.
+(!) The following technical constraint was applied to the algorithm implementation: The dynamic programming approach for 0-1 knapsack problems requires the capacity to be of type integer, or better it requires incremental steps of increasing the capacity for its calculation. For the values of the cryptos we are facing a value ranging from two decimal places before and eigth decimal places after the comma. In order to keep the memory consumption within a achievable range the implementation only considers up to six fractional digits of the crypto value. This value is then multiplied with a scale factor to be used as capacity in the best value calculation. This limitation can be mitigated in a next step, by optimizing the memory consumption of the algorithm, e.g. by memoization or using a 1-D array instead of a 2-D array for the dynamic programming computation.
 
 ### Run unit tests
 
@@ -73,3 +73,19 @@ The implemented algorithm is available for use on the example input data in the 
 Implement a Web service (Kestrel, .NET Core API), and expose the implemented functionality through it. Implement an endpoint that will receive the required parameters ( order amount, order type and return a JSON response with the "best execution" plan.
 
 ### Solution
+
+The best value calculation algorithm is provided as a web service inside the `CryptoExchangeBestValue.WebService` project. This web service is a [Minimal API application](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/overview) which exposes a single endpoint `POST /best-value` and expects the request body to be a JSON document equal to the provided exchange sample data.
+
+To use the application do the following:
+
+1. Start the application
+   1. either by running `dotnet run` inside the `CryptoExchangeBestValue.WebService` directory,
+   1. or by starting the application in an IDE of your choice (Visual Studio, Rider)
+1. Go to a browser and open the `/swagger` path of the application
+1. Click on the 'POST /best-value' section to open up the details
+1. Click on the "Try it out" button
+1. Copy the content from one of the example exchange json files and paste it into the multiline text field in the browser
+1. Hit the "Execute" button and wait for the computation to finish
+1. When the results are returned you can see it in the section named 'Responses'
+
+A Docker file is provided to build and run the application as a container. This is used by Visual Studio or can be used to manually create a Docker image with the application and then create and start a Docker container from this image.

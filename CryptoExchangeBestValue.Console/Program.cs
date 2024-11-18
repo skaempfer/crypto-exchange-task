@@ -20,7 +20,7 @@ await parserResult.WithParsedAsync(async (options) =>
 
 	BestValueCalculator bestValueCalculator = new();
 
-	Console.WriteLine($"Buy and sell results for {options.InputPath}:");
+	Console.WriteLine($"Buy and sell results exchange {exchangeInput.Id}:");
 
 	var buyResult = bestValueCalculator.Buy(
 		exchangeInput.AvailableFunds.Euro,
