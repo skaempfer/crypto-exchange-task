@@ -19,23 +19,23 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/best-value", (IBestValueCalculator bestValueCalculator, [FromBody]CryptoExchangeInput exchangeInput) =>
+app.MapPost("/best-value", (IBestValueCalculator bestValueCalculator, [FromBody] CryptoExchangeInput exchangeInput) =>
 	{
-	var buyResult = bestValueCalculator.Buy(
-		exchangeInput.AvailableFunds.Euro,
-		exchangeInput.OrderBook.Asks.Select(x => x.Order));
+		var buyResult = bestValueCalculator.Buy(
+			exchangeInput.AvailableFunds.Euro,
+			exchangeInput.OrderBook.Asks.Select(x => x.Order));
 
-	var sellResult = bestValueCalculator.Sell(
-		exchangeInput.AvailableFunds.Crypto,
-		exchangeInput.OrderBook.Bids.Select(x => x.Order));
+		var sellResult = bestValueCalculator.Sell(
+			exchangeInput.AvailableFunds.Crypto,
+			exchangeInput.OrderBook.Bids.Select(x => x.Order));
 
-	return Results.Json(
-		new
-		{
-			ExchangeId = exchangeInput.Id,
-			BuyResult = new { Cryptos = buyResult.Result, OrderIds = buyResult.OrderIds, },
-			SellResult = new { Euros = sellResult.Result, OrderIds = sellResult.OrderIds, },
-		});
+		return Results.Json(
+			new
+			{
+				ExchangeId = exchangeInput.Id,
+				BuyResult = new { Cryptos = buyResult.Result, OrderIds = buyResult.OrderIds, },
+				SellResult = new { Euros = sellResult.Result, OrderIds = sellResult.OrderIds, },
+			});
 	})
 .WithName("Calculate crypto exchange best value")
 .WithOpenApi();

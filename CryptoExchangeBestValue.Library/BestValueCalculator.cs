@@ -22,18 +22,18 @@ public class BestValueCalculator : IBestValueCalculator
 		GC.Collect();
 		GC.WaitForPendingFinalizers();
 
-		return new BestValueResult(Double.Round(bestValue,2), itemIds);
+		return new BestValueResult(Double.Round(bestValue, 2), itemIds);
 	}
 
 	/// <inheritdoc cref="IBestValueCalculator.Sell"/>
 	public BestValueResult Sell(double availableCryptos, IEnumerable<Order> bidOrders)
 	{
 		KnapsackItem[] knapsackItems = bidOrders.Select(x => new KnapsackItem()
-			{
-				Id = x.Id,
-				Value = x.Price,
-				Weight = x.Amount,
-			})
+		{
+			Id = x.Id,
+			Value = x.Price,
+			Weight = x.Amount,
+		})
 			.ToArray();
 
 		(double bestValue, string[] itemIds) = Solve01KnapsackProblem(availableCryptos, knapsackItems, 1_000_000);

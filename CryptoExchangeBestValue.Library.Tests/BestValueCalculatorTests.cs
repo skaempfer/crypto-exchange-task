@@ -17,7 +17,7 @@ public class BestValueCalculatorTests
 				CreateAskOrder("3", amount: 0.01, price: 40.1),
 			},
 			0.25,
-			new List<string>(){ "1", "2" },
+			new List<string>() { "1", "2" },
 		],
 		[
 			61,
@@ -28,7 +28,7 @@ public class BestValueCalculatorTests
 				CreateAskOrder("3", amount: 0.01, price: 4),
 			},
 			0.11,
-			new List<string>(){ "1", "3" },
+			new List<string>() { "1", "3" },
 		],
 		[
 			// Notice how the chosen items change when we get to the capacity limit
@@ -41,7 +41,7 @@ public class BestValueCalculatorTests
 				CreateAskOrder("3", amount: 0.01, price: 4),
 			},
 			0.11,
-			new List<string>(){ "2", "3" },
+			new List<string>() { "2", "3" },
 		]
 	];
 
@@ -73,7 +73,7 @@ public class BestValueCalculatorTests
 				CreateBidOrder("6", amount: 3, price: 100),
 			},
 			415,
-			new List<string>(){ "1", "3", "4" },
+			new List<string>() { "1", "3", "4" },
 		]
 	];
 

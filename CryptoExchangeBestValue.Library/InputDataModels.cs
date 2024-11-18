@@ -30,7 +30,7 @@ public class UserFunds
 	/// Amount of Crypto resources that can be sold.
 	/// </summary>
 	public double Crypto { get; set; }
-	
+
 	/// <summary>
 	/// Amount of Euro resources that can be used to buy <see cref="Crypto"/> resources.
 	/// </summary>
@@ -94,12 +94,12 @@ public class Order
 	/// Presumably. Not enough information in task
 	/// </remarks>
 	public string Kind { get; set; } = string.Empty;
-	
+
 	/// <summary>
 	/// The amount of cryptos the provider of this order is willing to trade.
 	/// </summary>
 	public double Amount { get; set; }
-	
+
 	/// <summary>
 	/// The amount of money the provider of this <see cref="Order"/> is willing to trade <see cref="Amount"/> for.
 	/// </summary>
