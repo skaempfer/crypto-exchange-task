@@ -3,6 +3,9 @@ root = true
 [*]
 indent_style = tab
 
+[*.{yml,yaml}]
+indent_style = space
+
 [*.xml]
 indent_size = 2
 

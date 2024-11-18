@@ -29,6 +29,8 @@ The task at hand is a manifestation of the well-known knapsack problem from the 
 >
 > Source: [Wikipedia: Knapsack problem](https://en.wikipedia.org/wiki/Knapsack_problem)
 
+More specifically the task is a 0-1 knapsack problem which means that we can only take or leave an item (order) as a whole and not parts of it. 
+
 The implementation to solve the task is inside the project `CryptoExchangeBestValue.Library`. This library exposes the class `BestValueCalculator` which looks as follows:
 
 ```csharp
@@ -40,7 +42,7 @@ public interface IBestValueCalculator
 }
 ```
 
-Using the `Buy` method we can calculate the highest amount of cryptos we can buy from a number of ask orders given a specific amount of euros. Using the `Sell` method we can calculate the highest amount of euros we can obtain from selling a specific amount of cryptos and chosing from a set of bid orders.
+Using the `Buy` method we can calculate the highest amount of cryptos we can buy from a number of ask orders given a specific amount of euros as available funds. Using the `Sell` method we can calculate the highest amount of euros we can obtain from selling a specific amount of cryptos from our available funds and chosing from a set of bid orders.
 
 Internally both the `Buy` and the `Sell` method use the same 0-1 knapsack problem solving algorithm which is based on the [method of dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming). In order to do this we need to map the properties of our real world example to the properties of the knapsack problem. This is shown in the table below:
 
@@ -50,7 +52,7 @@ Internally both the `Buy` and the `Sell` method use the same 0-1 knapsack proble
 | Value             |Amount (Ask)    | Price (Bid)       |
 | Weight            |Price (Ask)     | Amound (Bid)      |
 
-(!) The following technical constraint was applied to the algorithm implementation: The dynamic programming approach for 0-1 knapsack problems requires the capacity to be of type integer, or better it requires incremental steps of increasing the capacity for its calculation. For the values of the cryptos we are facing a value ranging from two decimal places before and eigth decimal places after the comma. In order to keep the memory consumption within a achievable range the implementation only considers up to six fractional digits of the crypto value. This value is then multiplied with a scale factor to be used as capacity in the best value calculation. This limitation can be mitigated in a next step, by optimizing the memory consumption of the algorithm, e.g. by memoization or using a 1-D array instead of a 2-D array for the dynamic programming computation.
+**CAUTION:** The following technical constraint was applied to the algorithm implementation: The dynamic programming approach for 0-1 knapsack problems requires the capacity to be of type integer, or better it requires incremental steps of increasing the capacity for its calculation. For the values of the cryptos we are facing a value ranging from two decimal places before and eigth decimal places after the comma. In order to keep the memory consumption within a achievable range the implementation only considers up to six fractional digits of the crypto value. This value is then multiplied with a scale factor to be used as capacity in the best value calculation. This limitation can be mitigated in a next step, by optimizing the memory consumption of the algorithm, e.g. by memoization or using a 1-D array instead of a 2-D array for the dynamic programming computation.
 
 ### Run unit tests
 
@@ -66,6 +68,8 @@ The implemented algorithm is available for use on the example input data in the 
 1. In a terminal navigate to `./CryptoExchangeBestValue.Console`
 1. Run the project `dotnet run ..\exchanges\exchange-06.json`
 
+**CAUTION:** The algorithm used to calculate the best possible value is very memory intensive. It is advised to run the application on a computer with at least 16GB of RAM.
+
 ## Task 2
 
 ### Problem Statement
@@ -76,16 +80,27 @@ Implement a Web service (Kestrel, .NET Core API), and expose the implemented fun
 
 The best value calculation algorithm is provided as a web service inside the `CryptoExchangeBestValue.WebService` project. This web service is a [Minimal API application](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/overview) which exposes a single endpoint `POST /best-value` and expects the request body to be a JSON document equal to the provided exchange sample data.
 
+To start the application via IDE do the following:
+
+1. Open the file `CryptoExchangeBestValue.sln` inside Visual Studio or Rider
+1. Set one of the following projects as startup project:
+   1. docker-compose: When you want to start the web application containerized
+   1. CryptoExchangeBestValue.WebService
+      1. Use the 'Container (Dockerfile)' launch configuration for a containerized start
+      1. Use the 'https' launch configuration for a non-containerized start
+1. A browser should open automatically at the location `https://localhost:55176/swagger`
+
+To start the application via command line do the following
+
+1. In a terminal navigate to the repository root
+1. Run `docker compose up`
+1. Open a browser and navigate to `https://localhost:55176/swagger`
+
 To use the application do the following:
 
-1. Start the application
-   1. either by running `dotnet run` inside the `CryptoExchangeBestValue.WebService` directory,
-   1. or by starting the application in an IDE of your choice (Visual Studio, Rider)
-1. Go to a browser and open the `/swagger` path of the application
+1. Make sure you see the Swagger UI at `https://localhost:55176/swagger`
 1. Click on the 'POST /best-value' section to open up the details
 1. Click on the "Try it out" button
 1. Copy the content from one of the example exchange json files and paste it into the multiline text field in the browser
 1. Hit the "Execute" button and wait for the computation to finish
 1. When the results are returned you can see it in the section named 'Responses'
-
-A Docker file is provided to build and run the application as a container. This is used by Visual Studio or can be used to manually create a Docker image with the application and then create and start a Docker container from this image.

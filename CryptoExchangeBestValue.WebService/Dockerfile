@@ -6,13 +6,14 @@ USER app
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
-
+ENV ASPNETCORE_URLS=http://+:8080;https://+:8081
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["CryptoExchangeBestValue.WebService/CryptoExchangeBestValue.WebService.csproj", "CryptoExchangeBestValue.WebService/"]
+COPY ["CryptoExchangeBestValue.Library/CryptoExchangeBestValue.Library.csproj", "CryptoExchangeBestValue.Library/"]
 RUN dotnet restore "./CryptoExchangeBestValue.WebService/CryptoExchangeBestValue.WebService.csproj"
 COPY . .
 WORKDIR "/src/CryptoExchangeBestValue.WebService"

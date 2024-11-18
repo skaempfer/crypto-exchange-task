@@ -1,0 +1,9 @@
+services:
+  cryptoexchangebestvalue.webservice:
+    image: ${DOCKER_REGISTRY-}cryptoexchangebestvaluewebservice
+    ports:
+      - 55175:8080
+      - 55176:8081
+    build:
+      context: .
+      dockerfile: CryptoExchangeBestValue.WebService/Dockerfile
