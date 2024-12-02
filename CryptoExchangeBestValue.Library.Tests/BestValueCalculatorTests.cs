@@ -59,6 +59,39 @@ public class BestValueCalculatorTests
 		actual.OrderIds.Should().BeEquivalentTo(expectedResultItems);
 	}
 
+	[Fact]
+	public void Buy_DataFromTaskExample_CalculatesBestCryptoBuyResult()
+	{
+		var askOrders = new List<Order>
+		{
+			CreateAskOrder("3k_1", amount: 1, price: 3000),
+			CreateAskOrder("3k_2", amount: 1, price: 3000),
+			CreateAskOrder("3k_3", amount: 1, price: 3000),
+			CreateAskOrder("3k_4", amount: 1, price: 3000),
+			CreateAskOrder("3k_5", amount: 1, price: 3000),
+			CreateAskOrder("3k_6", amount: 1, price: 3000),
+			CreateAskOrder("3k_7", amount: 1, price: 3000),
+			CreateAskOrder("3.3k_1", amount: 1, price: 3300),
+			CreateAskOrder("3.3k_2", amount: 1, price: 3300),
+			CreateAskOrder("3.3k_3", amount: 1, price: 3300),
+			CreateAskOrder("3.3k_4", amount: 1, price: 3300),
+			CreateAskOrder("3.5k_1", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_2", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_3", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_4", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_5", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_6", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_7", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_8", amount: 1, price: 3500),
+			CreateAskOrder("3.5k_9", amount: 1, price: 3500)
+		};
+
+		BestValueResult actual = this.sut.Buy(28000, askOrders);
+
+		actual.Result.Should().Be(9);
+		actual.OrderIds.Should().BeEquivalentTo("3k_1", "3k_2", "3k_3", "3k_4", "3k_5", "3k_6", "3k_7", "3.3k_1", "3.3k_2");
+	}
+
 	public static IEnumerable<object[]> SellData =>
 	[
 		[
